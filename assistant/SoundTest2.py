@@ -1,6 +1,8 @@
 import sounddevice as sd
 import sys
 
+
+
 # پشتیبانی از چاپ فارسی در ویندوز
 try:
     sys.stdout.reconfigure(encoding='utf-8')

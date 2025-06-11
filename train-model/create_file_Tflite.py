@@ -58,6 +58,8 @@ with open("train-model/intent_model_float16.tflite", "wb") as f:
     f.write(tflite_fp16_model)
 print("✅ مدل با Float16 Quantization ذخیره شد.")
 
+
+
 # ------------------------
 # 4. Full Integer Quantization
 # ------------------------
