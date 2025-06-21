@@ -1,11 +1,19 @@
 import os
-import pandas as pd
 import sys
-sys.stdout.reconfigure(encoding='utf-8')
+import pandas as pd
+from io import StringIO
+
+# تنظیم خروجی ترمینال برای پشتیبانی از UTF-8
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except:
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 # ساخت پوشه اگر وجود ندارد
 os.makedirs("train-model", exist_ok=True)
 
-# داده را به صورت رشته در قالب CSV
+# داده‌ها به صورت رشته CSV
 csv_content = """text,command_type
 چراغ را روشن کن,light_on
 روشن کن چراغ را,light_on
@@ -92,11 +100,10 @@ csv_content = """text,command_type
 لامپ خواب رو خاموش کن,bed_light_off
 """
 
-# تبدیل رشته به DataFrame
-from io import StringIO
+# تبدیل رشته CSV به DataFrame
 df = pd.read_csv(StringIO(csv_content))
 
-# ذخیره در فایل CSV با encoding مناسب برای فارسی
+# ذخیره DataFrame به فایل CSV با encoding مناسب فارسی
 df.to_csv("train-model/train.csv", index=False, encoding="utf-8-sig")
 
 print("فایل train.csv با موفقیت ساخته شد.")
